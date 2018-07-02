@@ -1,0 +1,33 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.ipph.spider.sipop.dao.SipopPatentFeePaidDao">
+
+	<!-- <sql id="column">
+		APP_NUMBER_,FEE_NAME_,AMOUNT_,FEE_DATE_,PAYER_,RECEIPT_NO_
+	</sql> -->
+	<sql id="selectColumns">
+		APP_NUMBER_ as appNumber,FEE_NAME_ as feeName ,AMOUNT_ as amount ,FEE_DATE_ as feeDate ,PAYER_ as payer,RECEIPT_NO_ as receiptNo
+	</sql>
+
+	<select id="getByAppNumber" resultType="SipopPatentFeePaid">
+		select <include refid="selectColumns"></include> from cpquery_patent_fee_paid where APP_NUMBER_=#{appNumber}
+	</select>
+	
+	<delete id="delByAppNumber">
+		delete from cpquery_patent_fee_paid where APP_NUMBER_=#{appNumber}
+	</delete>
+	
+	<insert id="add" parameterType="SipopPatentFeePaid">
+		insert into cpquery_patent_fee_paid (APP_NUMBER_,FEE_NAME_,AMOUNT_,FEE_DATE_,PAYER_,RECEIPT_NO_) 
+			values(#{appNumber},#{feeName},#{amount},#{feeDate},#{payer},#{receiptNo});
+	</insert>
+	
+	<insert id="batchAdd" parameterType="java.util.List">
+		insert into cpquery_patent_fee_paid (APP_NUMBER_,FEE_NAME_,AMOUNT_,FEE_DATE_,PAYER_,RECEIPT_NO_) 
+   		values
+	    <foreach collection="list" item="item" index="index" separator=","> 
+	         (#{item.appNumber},#{item.feeName},#{item.amount},#{item.feeDate},#{item.payer},#{item.receiptNo}) 
+	     </foreach>  
+	</insert>
+	
+</mapper>
