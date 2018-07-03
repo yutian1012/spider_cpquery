@@ -1,4 +1,4 @@
-package org.ipph.spider.sipop;
+package org.ipph.spider.jms;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,30 +12,29 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class PatentFeeProcessorTest {
-	
-	@Resource
-	private PatentFeeProcessor patentFeeProcessor;
+public class JmsSenderTest {
 
+	@Resource
+	private JmsSender jmsSender;
 	@Test
-	public void testProcess() {
-		
-		String url="http://www.sipop.cn/patent-interface-search/patentDetail/queryCostInfo?p_application_docNum=";
+	public void testSendMessage() {
 		List<String> appNumberList=new ArrayList<>();
 		appNumberList.add("CN201510830923.4");
 		appNumberList.add("CN201610562000.X");
 		appNumberList.add("CN201710634235.X");
 		appNumberList.add("CN201710932510.6");
-		//向线程中添加url
-		for(String appNumber:appNumberList) {
-			System.out.println("向线程池中添加新的url"+appNumber);
-			patentFeeProcessor.addNewUrl(url+appNumber);
-		}
 		
-		try {
-			Thread.currentThread().join();
-		} catch (InterruptedException e) {
-			e.printStackTrace();
+		for(String appNumber:appNumberList) {
+			jmsSender.sendByQueue(appNumber,JmsConfiguration.PATENT_FEE_QUEUE_NAME);
+			try {
+				Thread.sleep(3000);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+		}
+		while(true) {
+			
 		}
 	}
+
 }

@@ -1,0 +1,20 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.ipph.spider.dao.PageLogDao">
+
+	<sql id="selectColumns">
+		id,url,note,status,exceptionType
+	</sql>
+
+	<insert id="add" parameterType="PageLog">
+		insert into page_log (id,url,note,status,exceptionType) values(#{id},#{url},#{note},#{status},#{exceptionType});
+	</insert>
+	
+	<update id="update" parameterType="PageLog">
+		update page_log set note=#{note},status=#{status},exceptionType=#{exceptionType} where id=#{id}
+	</update>
+	
+	<select id="getById" resultType="PageLog">
+		select <include refid="selectColumns"></include> from page_log where id=#{id}
+	</select>
+</mapper>

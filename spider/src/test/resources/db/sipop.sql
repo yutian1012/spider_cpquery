@@ -3,6 +3,8 @@ drop database if exists spider_cpquery;
 create database spider_cpquery;
 use spider_cpquery;
 
+drop table if exists cpquery_patent_fee_paid;
+
 create table cpquery_patent_fee_paid(
 	app_number_ varchar(32) not null comment '申请号',
 	FEE_NAME_ varchar(64) not null comment '费用名称',
@@ -11,3 +13,13 @@ create table cpquery_patent_fee_paid(
 	PAYER_ varchar(128) not null comment '付费人',
 	RECEIPT_NO_ varchar(64) not null comment '收据号'
 ) comment '专利已缴费表';
+
+drop table if exists page_log;
+
+create table page_log(
+	id varchar(64) not null primary key comment '日志主键字段',
+	url varchar(1024) not null comment '爬取地址',
+	note text comment '异常信息',
+	status varchar(32) not null comment '状态',
+	exceptionType varchar(32) comment '异常类型'
+) comment '爬虫日志表';
