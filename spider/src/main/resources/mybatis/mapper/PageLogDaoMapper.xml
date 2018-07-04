@@ -3,11 +3,11 @@
 <mapper namespace="org.ipph.spider.dao.PageLogDao">
 
 	<sql id="selectColumns">
-		id,url,note,status,exceptionType
+		id,url,note,status,exceptionType,createDate
 	</sql>
 
 	<insert id="add" parameterType="PageLog">
-		insert into page_log (id,url,note,status,exceptionType) values(#{id},#{url},#{note},#{status},#{exceptionType});
+		insert into page_log (id,url,note,status,exceptionType,createDate) values(#{id},#{url},#{note},#{status},#{exceptionType},#{createDate,jdbcType=DATE});
 	</insert>
 	
 	<update id="update" parameterType="PageLog">

@@ -31,4 +31,10 @@ public interface ISipopPatentFeePaidService {
 	 * @return
 	 */
 	public int delByAppNumber(String appNumber);
+	/**
+	 * 通过hash值判断是否已经存在
+	 * @param hash
+	 * @return
+	 */
+	public boolean isExist(String hash);
 }

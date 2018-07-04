@@ -1,12 +1,9 @@
 package org.ipph.spider.sipop;
 
-import java.text.ParseException;
 import java.util.List;
 
-import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
 
-import org.ipph.spider.aop.PageProcessorLog;
 import org.ipph.spider.enumeration.LogModelEnum;
 import org.ipph.spider.exception.SpiderConnectionException;
 import org.ipph.spider.processor.AbstractPageProcessor;
@@ -14,8 +11,6 @@ import org.ipph.spider.sipop.entity.SipopPatentFeePaid;
 import org.ipph.spider.sipop.parser.SipopPatentFeePaidParser;
 import org.ipph.spider.sipop.service.ISipopPatentFeePaidService;
 import org.ipph.spider.util.HttpUtil;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

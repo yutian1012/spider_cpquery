@@ -1,5 +1,6 @@
 package org.ipph.spider.service;
 
+import java.util.Date;
 import java.util.UUID;
 
 import javax.annotation.Resource;
@@ -29,6 +30,7 @@ public class PageLogServiceImpl implements IPageLogService{
 		pageLog.setNote("数据处理中...");
 		pageLog.setUrl(pageUrl);
 		pageLog.setStatus(PageLogStatusEnum.PROCESSING);
+		pageLog.setCreateDate(new Date());
 		
 		pageLogDao.add(pageLog);
 		

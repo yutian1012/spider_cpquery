@@ -1,5 +1,7 @@
 package org.ipph.spider.entity;
 
+import java.util.Date;
+
 import org.ipph.spider.enumeration.PageLogExceptionEnum;
 import org.ipph.spider.enumeration.PageLogStatusEnum;
 
@@ -18,4 +20,5 @@ public class PageLog extends PageModel{
 	private String note;
 	private PageLogStatusEnum status;
 	private PageLogExceptionEnum exceptionType;//异常类型
+	private Date createDate;
 }

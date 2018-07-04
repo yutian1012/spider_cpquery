@@ -14,6 +14,8 @@ create table cpquery_patent_fee_paid(
 	RECEIPT_NO_ varchar(64) not null comment '收据号'
 ) comment '专利已缴费表';
 
+alter table cpquery_patent_fee_paid add column HASH_ varchar(64) not null comment '对象hash值';
+
 drop table if exists page_log;
 
 create table page_log(
@@ -21,5 +23,7 @@ create table page_log(
 	url varchar(1024) not null comment '爬取地址',
 	note text comment '异常信息',
 	status varchar(32) not null comment '状态',
-	exceptionType varchar(32) comment '异常类型'
+	exceptionType varchar(32) comment '异常类型',
+	createDate date not null comment '创建日期'
 ) comment '爬虫日志表';
+

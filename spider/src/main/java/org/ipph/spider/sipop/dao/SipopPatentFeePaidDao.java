@@ -31,4 +31,10 @@ public interface SipopPatentFeePaidDao {
 	 * @return
 	 */
 	public int delByAppNumber(String appNumber);
+	/**
+	 * 判断数据是否已经存在
+	 * @param hash
+	 * @return
+	 */
+	public boolean isExist(String hash);
 }

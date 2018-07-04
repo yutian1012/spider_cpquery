@@ -10,7 +10,8 @@ spring:
  datasource:
   type: com.alibaba.druid.pool.DruidDataSource		# 当前数据源操作类型
   driver-class-name: org.gjt.mm.mysql.Driver		# mysql驱动包
-  url: jdbc:mysql://localhost:3306/spider_cpquery		#  数据库名称
+ # url: jdbc:mysql://localhost:3306/spider_cpquery		#  数据库名称
+  url: jdbc:mysql://172.17.30.165:3306/spider_cpquery_0704_sjq   #  数据库名称
   username: root
   password: root
   dbcp2:

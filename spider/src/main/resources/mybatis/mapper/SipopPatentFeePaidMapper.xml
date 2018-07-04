@@ -6,7 +6,7 @@
 		APP_NUMBER_,FEE_NAME_,AMOUNT_,FEE_DATE_,PAYER_,RECEIPT_NO_
 	</sql> -->
 	<sql id="selectColumns">
-		APP_NUMBER_ as appNumber,FEE_NAME_ as feeName ,AMOUNT_ as amount ,FEE_DATE_ as feeDate ,PAYER_ as payer,RECEIPT_NO_ as receiptNo
+		APP_NUMBER_ as appNumber,FEE_NAME_ as feeName ,AMOUNT_ as amount ,FEE_DATE_ as feeDate ,PAYER_ as payer,RECEIPT_NO_ as receiptNo,HASH_ as hash
 	</sql>
 
 	<select id="getByAppNumber" resultType="SipopPatentFeePaid">
@@ -18,16 +18,19 @@
 	</delete>
 	
 	<insert id="add" parameterType="SipopPatentFeePaid">
-		insert into cpquery_patent_fee_paid (APP_NUMBER_,FEE_NAME_,AMOUNT_,FEE_DATE_,PAYER_,RECEIPT_NO_) 
-			values(#{appNumber},#{feeName},#{amount},#{feeDate},#{payer},#{receiptNo});
+		insert into cpquery_patent_fee_paid (APP_NUMBER_,FEE_NAME_,AMOUNT_,FEE_DATE_,PAYER_,RECEIPT_NO_,HASH_) 
+			values(#{appNumber},#{feeName},#{amount},#{feeDate},#{payer},#{receiptNo},#{hash});
 	</insert>
 	
 	<insert id="batchAdd" parameterType="java.util.List">
-		insert into cpquery_patent_fee_paid (APP_NUMBER_,FEE_NAME_,AMOUNT_,FEE_DATE_,PAYER_,RECEIPT_NO_) 
+		insert into cpquery_patent_fee_paid (APP_NUMBER_,FEE_NAME_,AMOUNT_,FEE_DATE_,PAYER_,RECEIPT_NO_,HASH_) 
    		values
 	    <foreach collection="list" item="item" index="index" separator=","> 
-	         (#{item.appNumber},#{item.feeName},#{item.amount},#{item.feeDate},#{item.payer},#{item.receiptNo}) 
+	         (#{item.appNumber},#{item.feeName},#{item.amount},#{item.feeDate},#{item.payer},#{item.receiptNo},#{item.hash}) 
 	     </foreach>  
 	</insert>
 	
+	<select id="isExist" resultType="boolean">
+		select count(*) from cpquery_patent_fee_paid where HASH_=#{hash}
+	</select>
 </mapper>
