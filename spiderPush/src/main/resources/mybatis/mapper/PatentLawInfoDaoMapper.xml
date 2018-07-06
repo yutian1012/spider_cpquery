@@ -1,0 +1,16 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.ipph.spiderPush.patent.dao.PatentLawInfoDao">
+
+	<sql id="selectColumns">
+		id,LAW_INFO_ as lawInfo
+	</sql>
+
+	<insert id="add" parameterType="PatentLawInfoModel">
+		insert into patent_law_info (id,LAW_INFO_) values(#{id},#{lawInfo});
+	</insert>
+	
+	<select id="getById" resultType="PatentLawInfoModel">
+		select <include refid="selectColumns"></include> from patent_law_info where id=#{id}
+	</select>
+</mapper>

@@ -18,6 +18,7 @@
 		<spring-boot.version>2.0.2.RELEASE</spring-boot.version>
 		<lombok.version>1.16.18</lombok.version>
 		<webmagic.version>0.5.3</webmagic.version>
+		<fastjson.version>1.2.34</fastjson.version>
 	</properties>
 	
 	<dependencyManagement>
@@ -70,6 +71,11 @@
 			    <artifactId>webmagic-extension</artifactId>
 			    <version>${webmagic.version}</version>
 			</dependency>
+			<dependency>
+	            <groupId>com.alibaba</groupId>
+	            <artifactId>fastjson</artifactId>
+	            <version>${fastjson.version}</version>
+	        </dependency>
 			<dependency>
 			    <groupId>commons-lang</groupId>
 			    <artifactId>commons-lang</artifactId>
@@ -128,5 +134,6 @@
 
 	<modules>
 		<module>spider</module>
+		<module>spiderPush</module>
 	</modules>
 </project>

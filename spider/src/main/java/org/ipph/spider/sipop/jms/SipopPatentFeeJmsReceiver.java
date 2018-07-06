@@ -23,7 +23,6 @@ public class SipopPatentFeeJmsReceiver {
     @JmsListener(destination = JmsConfiguration.PATENT_FEE_QUEUE_NAME)
     public void receiveByQueue(String appNumber) {
     	logger.info("接收队列消息:" + appNumber);
-        System.out.println();
         //向爬虫中添加url
         patentFeeProcessor.addNewUrl(url+appNumber);
     }

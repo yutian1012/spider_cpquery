@@ -3,9 +3,15 @@ package org.ipph.spider.service;
 
 import static org.junit.Assert.assertNotNull;
 
+import java.util.Date;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+
 import javax.annotation.Resource;
 
 import org.ipph.spider.entity.PageLog;
+import org.ipph.spider.entity.PageLogReport;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -25,6 +31,18 @@ public class PageLogServiceImplTest {
 		PageLog temp=pageLogService.getById(pageLog.getId());
 		
 		assertNotNull(temp);
+	}
+	
+	@Test
+	public void testReport() {
+		Date reportDate=new Date(System.currentTimeMillis());
+		
+		List<PageLogReport> result=pageLogService.reportSipderResult(reportDate);
+		
+		for(PageLogReport report:result) {
+			System.out.println(report);
+		}
+		
 	}
 
 }

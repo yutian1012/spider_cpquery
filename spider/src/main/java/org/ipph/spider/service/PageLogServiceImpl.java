@@ -1,12 +1,14 @@
 package org.ipph.spider.service;
 
 import java.util.Date;
+import java.util.List;
 import java.util.UUID;
 
 import javax.annotation.Resource;
 
 import org.ipph.spider.dao.PageLogDao;
 import org.ipph.spider.entity.PageLog;
+import org.ipph.spider.entity.PageLogReport;
 import org.ipph.spider.enumeration.PageLogStatusEnum;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -47,5 +49,10 @@ public class PageLogServiceImpl implements IPageLogService{
 		return pageLogDao.getById(id);
 	}
 
+	@Override
+	public List<PageLogReport> reportSipderResult(Date reportDate) {
+		return pageLogDao.reportSipderResult(reportDate);
+	}
+	
 
 }

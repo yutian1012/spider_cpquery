@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8"/>
+        <title>Title</title>
+    </head>
+    <body>
+       <h1>爬虫数据报告</h1>
+       <table>
+       	<thead>
+       		<tr>
+       			<th>序号</th>
+       			<th>模块</th>
+       			<th>处理状态</th>
+       			<th>处理数量</th>
+       		</tr>
+       	</thead>
+       	<tbody>
+       		<tr th:each="report,index : ${reportList}">
+		      <td th:text="${index.count}"></td>
+		      <td th:text="${report.model}"></td>
+		      <td th:text="${report.status}"></td>
+		      <td th:text="${report.size}"></td>
+		    </tr>
+       	</tbody>
+       </table>
+    </body>
+</html>

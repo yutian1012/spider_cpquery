@@ -17,4 +17,8 @@
 	<select id="getById" resultType="PageLog">
 		select <include refid="selectColumns"></include> from page_log where id=#{id}
 	</select>
+	
+	<select id="reportSipderResult" resultType="PageLogReport">
+		select status as status,count(*) as size from page_log where createDate=#{date,jdbcType=DATE} group by status;
+	</select>
 </mapper>

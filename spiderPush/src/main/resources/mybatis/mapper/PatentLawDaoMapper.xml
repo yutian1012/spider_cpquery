@@ -1,0 +1,16 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.ipph.spiderPush.patent.dao.PatentLawDao">
+
+	<sql id="selectColumns">
+		id,APP_NUMBER_ as appNumber,LAW_DATE_ as lawDate,LAW_STATUS_ as lawStatus
+	</sql>
+
+	<insert id="add" parameterType="PatentLawModel">
+		insert into patent_law (id,APP_NUMBER_,LAW_DATE_,LAW_STATUS_) values(#{id},#{appNumber},#{lawDate,jdbcType=DATE},#{lawStatus});
+	</insert>
+	
+	<select id="getById" resultType="PatentLawModel">
+		select <include refid="selectColumns"></include> from patent_law where id=#{id}
+	</select>
+</mapper>

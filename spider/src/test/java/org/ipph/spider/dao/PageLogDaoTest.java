@@ -4,7 +4,6 @@ package org.ipph.spider.dao;
 import static org.junit.Assert.assertNotNull;
 
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.UUID;
 
@@ -23,8 +22,6 @@ public class PageLogDaoTest {
 
 	@Resource
 	private PageLogDao pageLogDao;
-	
-	private SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
 	
 	@Test
 	public void testAdd() throws ParseException {
