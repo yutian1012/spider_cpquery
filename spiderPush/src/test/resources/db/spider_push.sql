@@ -2,6 +2,8 @@ drop database if exists spider_cpquery_push;
 
 create database spider_cpquery_push;
 
+use spider_cpquery_push;
+
 drop table if exists patent_law;
 
 create table patent_law(

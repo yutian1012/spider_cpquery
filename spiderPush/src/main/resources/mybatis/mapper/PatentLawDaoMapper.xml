@@ -2,6 +2,17 @@
 
 <mapper namespace="org.ipph.spiderPush.patent.dao.PatentLawDao">
 
+	<resultMap type="PatentLawModel" id="PatentLawModelResultMap">
+		<id column="id" property="id"/>
+		<result column="APP_NUMBER_" property="appNumber"/>
+		<result column="LAW_DATE_" property="lawDate" jdbcType="DATE"/>
+		<result column="LAW_STATUS_" property="lawStatus"/>
+		<association property="lawInfo" javaType="PatentLawInfoModel">
+			<id column="id" property="id"/>
+			<result column="LAW_INFO_" property="lawInfo"/>
+		</association>
+	</resultMap>
+
 	<sql id="selectColumns">
 		id,APP_NUMBER_ as appNumber,LAW_DATE_ as lawDate,LAW_STATUS_ as lawStatus
 	</sql>
@@ -10,7 +21,9 @@
 		insert into patent_law (id,APP_NUMBER_,LAW_DATE_,LAW_STATUS_) values(#{id},#{appNumber},#{lawDate,jdbcType=DATE},#{lawStatus});
 	</insert>
 	
-	<select id="getById" resultType="PatentLawModel">
-		select <include refid="selectColumns"></include> from patent_law where id=#{id}
+	<select id="getById" resultMap="PatentLawModelResultMap">
+		select a.id,APP_NUMBER_ as appNumber,LAW_DATE_ as lawDate,LAW_STATUS_ as lawStatus,b.id,b.LAW_INFO_ as lawInfo
+		from patent_law a left join patent_law_info b on a.id=b.id
+		where a.id=#{id}
 	</select>
 </mapper>

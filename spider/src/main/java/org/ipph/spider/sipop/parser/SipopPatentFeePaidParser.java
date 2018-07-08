@@ -22,7 +22,6 @@ public class SipopPatentFeePaidParser extends PageAbstractParser<SipopPatentFeeP
 	public boolean isValid() {
 		return false;
 	}
-	//https://my.oschina.net/anxiaole/blog/782026
 
 	@Override
 	protected List<SipopPatentFeePaid> parsePageList(Page page) throws Exception {

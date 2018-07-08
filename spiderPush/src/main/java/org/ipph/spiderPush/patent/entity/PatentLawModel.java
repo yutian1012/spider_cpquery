@@ -21,5 +21,6 @@ public class PatentLawModel implements Serializable{
 	// LAW_STATUS_
 	protected String  lawStatus;
 	// LAW_INFO_
-	protected String  lawInfo;
+	//protected String  lawInfo;
+	private PatentLawInfoModel lawInfo;
 }

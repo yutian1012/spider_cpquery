@@ -8,6 +8,7 @@ import java.util.UUID;
 
 import javax.annotation.Resource;
 
+import org.ipph.spiderPush.patent.entity.PatentLawInfoModel;
 import org.ipph.spiderPush.patent.entity.PatentLawModel;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -26,16 +27,29 @@ public class IPatentLawServiceTest {
 	@Test
 	public void testAdd() throws ParseException {
 		
+		String id=UUID.randomUUID().toString();
+		
 		PatentLawModel law=new PatentLawModel();
-		law.setId(UUID.randomUUID().toString())
+		law.setId(id)
 			.setAppNumber("CN201510831784.7")
 			.setLawDate(sdf.parse("2015.11.25"))
 			.setLawStatus("测试数据");
 		
+		PatentLawInfoModel lawInfo=new PatentLawInfoModel();
+		lawInfo.setId(id)
+			.setLawInfo("ccccccccccc");
+		
+		law.setLawInfo(lawInfo);
+		
 		patentLawService.add(law);
 		
 		PatentLawModel temp=patentLawService.getById(law.getId());
+		
 		assertNotNull(temp);
+		
+		PatentLawInfoModel lawInfoTemp=temp.getLawInfo();
+		
+		assertNotNull(lawInfoTemp);
 	}
 
 }
