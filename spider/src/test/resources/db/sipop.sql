@@ -26,4 +26,3 @@ create table page_log(
 	exceptionType varchar(32) comment '异常类型',
 	createDate date not null comment '创建日期'
 ) comment '爬虫日志表';
-

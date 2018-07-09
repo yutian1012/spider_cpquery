@@ -135,5 +135,6 @@
 	<modules>
 		<module>spider</module>
 		<module>spiderPush</module>
+		<module>spiderPushApi</module>
 	</modules>
 </project>

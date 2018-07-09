@@ -19,3 +19,10 @@ create table patent_law_info(
 	id varchar(64) not null primary key comment '同patent_law共用主键',
 	LAW_INFO_ text
 ) comment '法律状态信息表';
+
+
+drop table if exists cpquery_patent_info;
+
+create table cpquery_patent_info(
+	APP_NUMBER_ varchar(32) not null comment '申请号'
+) comment '专利数据同步表';
