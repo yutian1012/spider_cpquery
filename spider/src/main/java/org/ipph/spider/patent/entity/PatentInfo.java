@@ -1,4 +1,4 @@
-package org.ipph.spider.common.entity;
+package org.ipph.spider.patent.entity;
 
 import java.io.Serializable;
 

@@ -39,8 +39,7 @@ public class ScheduledTasks{
      * 每天发送一份邮件，反馈当前爬虫运行结果
      * 凌晨1点发送报告
      */
-   // @Scheduled(cron = "0 0 1 * * * ")
-	 @Scheduled(cron = "0 54 13 * * * ")
+    @Scheduled(cron = "0 0 1 * * * ")
     public void reportSpiderResult(){
     	
     	logger.info("preparing report spider result!");
@@ -49,8 +48,6 @@ public class ScheduledTasks{
     	 * 获取上一天的统计数据
     	 */
     	List<PageLogReport> result=pageLogService.reportSipderResult(DateUtils.addDays(new Date(), -1));
-    	
-    	//mailService.sendSimpleMail(to, "爬虫邮件报告", getMailContent(result));
     	
     	Map<String,Object> params=new HashMap<>();
     	params.put("reportList", result);

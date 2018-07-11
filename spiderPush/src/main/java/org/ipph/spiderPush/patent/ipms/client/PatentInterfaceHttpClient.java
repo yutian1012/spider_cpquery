@@ -113,7 +113,7 @@ public class PatentInterfaceHttpClient {
 	 * @return
 	 * @throws Exception
 	 */
-	private JSONObject getByHttpClient(List<NameValuePair> nvps,String url)throws Exception{
+	public JSONObject getByHttpClient(List<NameValuePair> nvps,String url)throws Exception{
 		 HttpClient httpclient = null;
 		try{
 			RequestConfig defaultRequestConfig = RequestConfig.custom().setSocketTimeout(20000)

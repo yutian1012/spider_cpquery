@@ -20,6 +20,9 @@ public class PatentInfoServiceImpl implements IPatentInfoService{
 	
 	@Override
 	public int addPatentInfo(PatentInfo patent) {
+		if(isExists(patent.getAppNumber())) {
+			return 0;
+		}
 		return patentInfoDao.addPatentInfo(patent);
 	}
 

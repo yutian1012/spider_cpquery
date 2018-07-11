@@ -16,6 +16,8 @@ create table cpquery_patent_fee_paid(
 
 alter table cpquery_patent_fee_paid add column HASH_ varchar(64) not null comment '对象hash值';
 
+alter table cpquery_patent_fee_paid add INDEX app_number_index (app_number_);
+
 drop table if exists page_log;
 
 create table page_log(
@@ -26,3 +28,11 @@ create table page_log(
 	exceptionType varchar(32) comment '异常类型',
 	createDate date not null comment '创建日期'
 ) comment '爬虫日志表';
+
+drop table if exists cpquery_patent_info;
+
+create table cpquery_patent_info(
+	APP_NUMBER_ varchar(32) not null comment '申请号'
+) comment '专利数据同步表';
+
+alter table cpquery_patent_info add INDEX app_number_index (app_number_);

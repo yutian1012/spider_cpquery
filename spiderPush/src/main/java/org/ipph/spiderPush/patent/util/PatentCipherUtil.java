@@ -7,7 +7,7 @@ import java.util.Map;
 public class PatentCipherUtil {
 	private final static String keyParamName="keyStr";
 	private final static String passParamName="valueStr";
-	private final static String key="com.dddddd.dddddd";
+	private final static String key="com.xxyy.zhuanlitong";
 	
 	/**
 	 * 获取加密参数字符串

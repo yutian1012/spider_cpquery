@@ -17,7 +17,7 @@ public class PatentInterfaceHttpClientTest {
 	
 	@Resource
 	private PatentInterfaceHttpClient patentClient;
-
+	
 	@Test
 	public void test() throws Exception {
 		String appNumber="CN201510831784.7";

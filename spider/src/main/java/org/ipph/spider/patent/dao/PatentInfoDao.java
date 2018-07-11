@@ -1,10 +1,10 @@
-package org.ipph.spider.common.dao;
+package org.ipph.spider.patent.dao;
 
 import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
-import org.ipph.spider.common.entity.PatentInfo;
+import org.ipph.spider.patent.entity.PatentInfo;
 
 @Mapper
 public interface PatentInfoDao {
@@ -20,4 +20,6 @@ public interface PatentInfoDao {
 	public int batchAdd(List<PatentInfo> patentList);
 	
 	public boolean isExists(String appNumber);
+	
+	public int delByAppNumber(String appNumber);
 }

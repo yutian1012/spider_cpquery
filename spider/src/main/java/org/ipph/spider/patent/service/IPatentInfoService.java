@@ -1,8 +1,8 @@
-package org.ipph.spider.common.service;
+package org.ipph.spider.patent.service;
 
 import java.util.List;
 
-import org.ipph.spider.common.entity.PatentInfo;
+import org.ipph.spider.patent.entity.PatentInfo;
 
 
 public interface IPatentInfoService {
@@ -19,4 +19,6 @@ public interface IPatentInfoService {
 	public boolean isExists(String appNumber);
 	
 	public int syncPatent(String[] appNumbers);
+	
+	public int delByAppNumber(String appNumber);
 }

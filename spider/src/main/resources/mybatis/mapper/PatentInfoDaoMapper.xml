@@ -1,0 +1,42 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.ipph.spider.patent.dao.PatentInfoDao">
+
+	<sql id="selectColumns">
+		APP_NUMBER_ as appNumber
+	</sql>
+
+	<select id="getPatentInfo" resultType="PatentInfo">
+		select <include refid="selectColumns"></include> from cpquery_patent_info where APP_NUMBER_=#{appNumber}
+	</select>
+
+	<select id="getPatentInfoListLimit" resultType="PatentInfo">
+		select <include refid="selectColumns"></include> from cpquery_patent_info limit #{start} , #{size}
+	</select>
+	
+	<insert id="addPatentInfo" parameterType="PatentInfo">
+		insert into cpquery_patent_info (APP_NUMBER_) 
+			values(#{appNumber})
+	</insert>
+	
+	<insert id="batchAdd" parameterType="java.util.List">
+		insert into cpquery_patent_info (APP_NUMBER_) 
+   		values
+	    <foreach collection="list" item="item" index="index" separator=","> 
+	         (#{item.appNumber}) 
+	     </foreach>  
+	</insert>
+	
+	<select id="isExists" resultType="boolean">
+		select count(*) from cpquery_patent_info where APP_NUMBER_=#{appNumber}
+	</select>
+	
+	<select id="getTotals" resultType="long">
+		select count(*) from cpquery_patent_info
+	</select>
+	
+	<delete id="delByAppNumber">
+		delete from cpquery_patent_info where APP_NUMBER_=#{appNumber}
+	</delete>
+	
+</mapper>

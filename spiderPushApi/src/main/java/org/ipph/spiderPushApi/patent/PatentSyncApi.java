@@ -30,7 +30,7 @@ public class PatentSyncApi {
 		
 		if(null!=array) {
 			String body=array.toString();
-			JSONObject result=sendHttpPost("http://localhost:8002/patent/syncPatent", body);
+			JSONObject result=sendHttpPost("http://localhost:8001/patent/syncPatent", body);
 			if(null!=result) {
 				response= (Response) JSONObject.toBean(result, Response.class);
 			}

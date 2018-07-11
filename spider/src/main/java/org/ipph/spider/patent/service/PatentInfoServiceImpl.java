@@ -1,5 +1,6 @@
-package org.ipph.spider.common.service;
+package org.ipph.spider.patent.service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -7,8 +8,8 @@ import java.util.Map;
 import javax.annotation.Resource;
 import javax.transaction.Transactional;
 
-import org.ipph.spider.common.dao.PatentInfoDao;
-import org.ipph.spider.common.entity.PatentInfo;
+import org.ipph.spider.patent.dao.PatentInfoDao;
+import org.ipph.spider.patent.entity.PatentInfo;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -56,16 +57,30 @@ public class PatentInfoServiceImpl implements IPatentInfoService{
 		
 		int result=0;
 		
+		List<PatentInfo> patentList=new ArrayList<>(appNumbers.length);
+		
 		for(String appNumber:appNumbers) {
-			if(!isExists(appNumber)) {
+			if(!isExists(appNumber)) {//可能会存在同步问题
 				PatentInfo patent=new PatentInfo();
 				patent.setAppNumber(appNumber);
 				
-				result+=addPatentInfo(patent);
+				//result+=addPatentInfo(patent);
+				patentList.add(patent);
 			}
 		}
 		
+		if(patentList.size()>0) {
+			batchAdd(patentList);
+			result=patentList.size();
+			patentList.clear();
+		}
+		
 		return result;
+	}
+
+	@Override
+	public int delByAppNumber(String appNumber) {
+		return patentInfoDao.delByAppNumber(appNumber);
 	}
 
 }
