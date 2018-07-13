@@ -104,32 +104,34 @@
     			<filtering>true</filtering>
     		</resource>
     	</resources>
-    	<!-- 针对resources目录下的资源文件，以$开头和结尾的作文变量引用 -->
-    	<plugins>
-    		<plugin>
-    			<groupId>org.apache.maven.plugins</groupId>
-    			<artifactId>maven-resources-plugin</artifactId>
-    			<configuration>
-    				<delimiters>
-    					<delimit>$</delimit>
-    				</delimiters>
-    			</configuration>
-    		</plugin>
-    		<plugin>
-			    <groupId>org.springframework.boot</groupId>
-			    <artifactId>spring-boot-maven-plugin</artifactId>
-			    <configuration>
-			        <executable>true</executable>
-			    </configuration>
-			    <executions>
-                    <execution>
-                        <goals>
-                            <goal>repackage</goal>
-                        </goals>
-                    </execution>
-                </executions>
-			</plugin>
-    	</plugins>
+    	<pluginManagement>
+    		<!-- 针对resources目录下的资源文件，以$开头和结尾的作文变量引用 -->
+	    	<plugins>
+	    		<plugin>
+	    			<groupId>org.apache.maven.plugins</groupId>
+	    			<artifactId>maven-resources-plugin</artifactId>
+	    			<configuration>
+	    				<delimiters>
+	    					<delimit>$</delimit>
+	    				</delimiters>
+	    			</configuration>
+	    		</plugin>
+	    		<plugin>
+				    <groupId>org.springframework.boot</groupId>
+				    <artifactId>spring-boot-maven-plugin</artifactId>
+				    <configuration>
+				        <executable>true</executable>
+				    </configuration>
+				    <executions>
+	                    <execution>
+	                        <goals>
+	                            <goal>repackage</goal>
+	                        </goals>
+	                    </execution>
+	                </executions>
+				</plugin>
+	    	</plugins>
+    	</pluginManagement>
     </build>
 
 	<modules>

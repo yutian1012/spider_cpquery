@@ -36,18 +36,15 @@ public class ScheduledTasks{
 	private Logger logger=LoggerFactory.getLogger(ScheduledTasks.class);
 
     /**
-     * 每天发送一份邮件，反馈当前爬虫运行结果
+     * 每周日，反馈当前爬虫运行结果
      * 凌晨1点发送报告
      */
-    @Scheduled(cron = "0 0 1 * * * ")
+    @Scheduled(cron = "0 0 1 ? * SUN ")
     public void reportSpiderResult(){
     	
     	logger.info("preparing report spider result!");
     	
-    	/**
-    	 * 获取上一天的统计数据
-    	 */
-    	List<PageLogReport> result=pageLogService.reportSipderResult(DateUtils.addDays(new Date(), -1));
+    	List<PageLogReport> result=pageLogService.reportSipderResult(DateUtils.addDays(new Date(), -7));
     	
     	Map<String,Object> params=new HashMap<>();
     	params.put("reportList", result);

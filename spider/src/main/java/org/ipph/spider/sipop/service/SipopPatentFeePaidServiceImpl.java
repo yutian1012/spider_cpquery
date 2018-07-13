@@ -4,7 +4,7 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
-import org.apache.commons.codec.digest.Md5Crypt;
+import org.ipph.spider.redis.RedisService;
 import org.ipph.spider.sipop.dao.SipopPatentFeePaidDao;
 import org.ipph.spider.sipop.entity.SipopPatentFeePaid;
 import org.springframework.stereotype.Service;
@@ -17,19 +17,32 @@ public class SipopPatentFeePaidServiceImpl implements ISipopPatentFeePaidService
 	
 	@Resource
 	private SipopPatentFeePaidDao dao;
+	@Resource
+	private RedisService redisService;
 
 	@Override
 	public int batchAdd(List<SipopPatentFeePaid> paidList, String appNumber) {
+		
 		if(null==paidList||paidList.size()==0) {
+			return 0;
+		}
+		
+		//判断数据库中是否已经存在
+		if(redisService.isExists(appNumber)&&paidList.size()==redisService.getNum(appNumber)) {
 			return 0;
 		}
 
 		for(SipopPatentFeePaid sipopPatentFeePaid:paidList) {
-			//sipopPatentFeePaid.setAppNumber(appNumber);
-			add(sipopPatentFeePaid, appNumber);
+			sipopPatentFeePaid.setAppNumber(appNumber);
+			sipopPatentFeePaid.setHash(DigestUtils.md5DigestAsHex(sipopPatentFeePaid.toString().getBytes()));
+			//add(sipopPatentFeePaid, appNumber);
 		}
 		
-		//return dao.batchAdd(paidList);
+		dao.batchAdd(paidList);
+		
+		//添加到缓存数据中
+		redisService.add(appNumber, paidList.size()+"");
+		
 		return paidList.size();
 	}
 
@@ -63,5 +76,10 @@ public class SipopPatentFeePaidServiceImpl implements ISipopPatentFeePaidService
 	@Override
 	public boolean isExist(String hash) {
 		return dao.isExist(hash);
+	}
+
+	@Override
+	public List<SipopPatentFeePaid> getByAppNumberIn(String[] appNumbers) {
+		return dao.getByAppNumberIn(appNumbers);
 	}
 }

@@ -35,22 +35,20 @@ public class PatentInterfaceInitDataTest {
 	
 	@Test
 	public void testPatentDownload() throws Exception {
-		int from=334000;
-		int to=334000;
+		int from=0;
 		int size=1000;
 		int total=0;
 		
 		//获取数据集大小
-		JSONObject result=getPatentNo(from, to);
+		JSONObject result=getPatentNo(from, 0);
 		
 		if(null!=result&&result.get("message").equals("SUCCESS")) {
 			total=result.getIntValue("total");
 		}
 		
-		while(to<total) {
-			to+=size;
-			logger.info(Thread.currentThread().getName()+" start thread process from "+from+" to "+to);
-			threadPool.execute(new PatentNoDownload(from,to));
+		while(from<total) {
+			logger.info(Thread.currentThread().getName()+" start thread process from "+from+" to "+from+size);
+			threadPool.execute(new PatentNoDownload(from,from+size));
 			from+=size;
 		}
 		

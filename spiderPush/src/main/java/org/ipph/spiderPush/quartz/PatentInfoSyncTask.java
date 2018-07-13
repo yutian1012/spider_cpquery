@@ -30,7 +30,7 @@ public class PatentInfoSyncTask {
 	
 	private PatentSyncApi patentSyncApi=new PatentSyncApi();
 	
-	@Scheduled(cron = "0 27 11 * * * ")
+	@Scheduled(cron = "0 55 9 * * * ")
 	public void syncPatent(){
 		 
 		 logger.info("sync patent ...");
@@ -39,12 +39,10 @@ public class PatentInfoSyncTask {
 		 long total=patentInfoService.getTotals();
 		 
 		 long from=0;
-		 long to=0;
 		 long size=1000;
 		 
-		 while(to<total) {
-			 to+=size;
-			 threadPool.execute(new PatentSyncRunnable(from, to));
+		 while(from<total) {
+			 threadPool.execute(new PatentSyncRunnable(from, size));
 			 from+=size;
 		 }
 	 }

@@ -37,4 +37,10 @@ public interface ISipopPatentFeePaidService {
 	 * @return
 	 */
 	public boolean isExist(String hash);
+	/**
+	 * 返回多个申请号的集合数据
+	 * @param appNumbers
+	 * @return
+	 */
+	public List<SipopPatentFeePaid> getByAppNumberIn(String[] appNumbers);
 }

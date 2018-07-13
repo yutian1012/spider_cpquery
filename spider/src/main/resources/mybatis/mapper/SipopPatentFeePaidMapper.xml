@@ -33,4 +33,17 @@
 	<select id="isExist" resultType="boolean">
 		select count(*) from cpquery_patent_fee_paid where HASH_=#{hash}
 	</select>
+	
+	<select id="countDistinctAppNumber" resultType="long">
+		select count(distinct APP_NUMBER_) from cpquery_patent_fee_paid
+	</select>
+	
+	<select id="getRedisInitData" resultType="map">
+		select count(*) num,app_number_ as appNumber from cpquery_patent_fee_paid group by APP_NUMBER_ limit #{from},#{size}
+	</select>
+	
+	<select id="getByAppNumberIn" resultType="SipopPatentFeePaid">
+		select <include refid="selectColumns"></include> from cpquery_patent_fee_paid 
+		where APP_NUMBER_ in <foreach collection="array" item="item" open="(" close=")" separator=",">#{item}</foreach> 
+	</select>
 </mapper>

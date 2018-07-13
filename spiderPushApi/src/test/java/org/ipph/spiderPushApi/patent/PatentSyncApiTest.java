@@ -21,5 +21,17 @@ public class PatentSyncApiTest {
 		
 		assertTrue(ExceptionMsg.SUCCESS.getCode().equals(response.getRspCode()));
 	}
+	
+	@Test
+	public void testSyncPaidFee() throws Exception {
+		PatentSyncApi api=new PatentSyncApi();
+		String[] appNumbers=new String[] {"CN201610009384.2","CN201711097794.8"};
+		
+		Response response=api.syncPaidFee(appNumbers);
+		
+		assertNotNull(response);
+		
+		assertTrue(ExceptionMsg.SUCCESS.getCode().equals(response.getRspCode()));
+	}
 
 }

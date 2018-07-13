@@ -26,19 +26,18 @@ public class SipopPatentFeeScheduledTask {
 	@Resource
 	private JmsSender jmsSender;
 	
-	 @Scheduled(cron = "0 46 15 * * * ")
+	//每周五执行
+	@Scheduled(cron = "0 0 1 ? * FRI ")
 	 public void executeSpiderSipop(){
 		//获取待同步到专利数量
 		 long total=patentInfoService.getTotals();
 		 
-		 Long from=0L;
-		 Long to=0L;
-		 long size=1000;
+		 Long from=93391L;
+		 Long size=1000L;
 		 
-		 while(to<total) {
-			 to+=size;
-			 logger.info("get patent info from db ... start "+from+" end "+to);
-			 List<PatentInfo> patentList=patentInfoService.getPatentInfoListLimit(from.intValue(),to.intValue());
+		 while(from<=total) {
+			 logger.info("get patent info from db ... start "+from+" end "+size);
+			 List<PatentInfo> patentList=patentInfoService.getPatentInfoListLimit(from.intValue(),size.intValue());
 			 if(null==patentList||patentList.size()==0) {
 				 return ;
 			 }
