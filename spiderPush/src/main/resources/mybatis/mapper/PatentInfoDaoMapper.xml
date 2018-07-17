@@ -35,4 +35,8 @@
 		select count(*) from cpquery_patent_info
 	</select>
 	
+	<select id="getPatentListLimit" resultType="string">
+		select <include refid="selectColumns"></include> from cpquery_patent_info limit #{start} , #{size}
+	</select>
+	
 </mapper>

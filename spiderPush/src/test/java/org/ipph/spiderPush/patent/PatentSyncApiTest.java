@@ -13,6 +13,7 @@ import org.ipph.spiderPushApi.common.Response;
 import org.ipph.spiderPushApi.patent.PatentSyncApi;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
@@ -22,6 +23,9 @@ public class PatentSyncApiTest {
 	
 	@Resource
 	private IPatentInfoService patentInfoService;
+	
+	@Value("${spider.patent.sync.url}")
+	private String url;
 
 	@Test
 	public void testSyncPatent() throws Exception {
@@ -41,7 +45,7 @@ public class PatentSyncApiTest {
 			 appNumbers[i]=patentList.get(i).getAppNumber();
 		 }
 		
-		Response response=api.syncPatent(appNumbers);
+		Response response=api.syncPatent(url,appNumbers);
 		
 		assertNotNull(response);
 		

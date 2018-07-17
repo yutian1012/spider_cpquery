@@ -16,7 +16,7 @@ create table cpquery_patent_fee_paid(
 
 alter table cpquery_patent_fee_paid add column HASH_ varchar(64) not null comment '对象hash值';
 
-alter table cpquery_patent_fee_paid add INDEX app_number_index (app_number_);
+alter table cpquery_patent_fee_paid add constraint app_number_unique unique(app_number_);
 
 drop table if exists page_log;
 

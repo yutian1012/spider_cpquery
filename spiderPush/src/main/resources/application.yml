@@ -27,3 +27,7 @@ info:
 ipms:
   patent:
     url: http://api.souips.com:8080/ipms-pi/pat
+spider:
+  patent:
+    sync:
+      url: http://localhost:8001/patent/syncPatent

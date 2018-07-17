@@ -12,7 +12,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 public class PatentInfoSyncTaskTest {
 	
 	@Resource
-	private PatentInfoSyncTask patentInfoSyncTask;
+	private PatentInfoSyncTaskDeprecated patentInfoSyncTask;
 
 	@Test
 	public void test() throws InterruptedException {

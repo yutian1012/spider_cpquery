@@ -26,7 +26,6 @@ public class PatentInfoController extends BaseController{
 	 */
 	@RequestMapping(value="/syncPatent" ,method=RequestMethod.POST,consumes=MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public Response syncPatent(@RequestBody String[] appNumbers) {
-		
 		if(null!=appNumbers&&appNumbers.length>0) {
 			patentInfoService.syncPatent(appNumbers);
 			return result(ExceptionMsg.SUCCESS);

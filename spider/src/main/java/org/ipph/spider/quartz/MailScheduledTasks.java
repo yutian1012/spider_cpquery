@@ -22,7 +22,7 @@ import org.springframework.stereotype.Component;
 @Component
 @Configurable
 @EnableScheduling
-public class ScheduledTasks{
+public class MailScheduledTasks{
 	
 	@Resource
 	private IPageLogService pageLogService;
@@ -33,13 +33,13 @@ public class ScheduledTasks{
 	@Value("${mail.reportTemplate}")
 	private String template;
 	
-	private Logger logger=LoggerFactory.getLogger(ScheduledTasks.class);
+	private Logger logger=LoggerFactory.getLogger(MailScheduledTasks.class);
 
     /**
-     * 每周日，反馈当前爬虫运行结果
-     * 凌晨1点发送报告
+     * 每周五，反馈当前爬虫运行结果
+     * 23点发送上7天报告
      */
-    @Scheduled(cron = "0 0 1 ? * SUN ")
+    @Scheduled(cron = "0 0 23 ? * FRI ")
     public void reportSpiderResult(){
     	
     	logger.info("preparing report spider result!");

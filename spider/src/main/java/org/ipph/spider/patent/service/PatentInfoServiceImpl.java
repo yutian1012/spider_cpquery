@@ -10,6 +10,7 @@ import javax.transaction.Transactional;
 
 import org.ipph.spider.patent.dao.PatentInfoDao;
 import org.ipph.spider.patent.entity.PatentInfo;
+import org.ipph.spider.redis.RedisService;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -18,6 +19,8 @@ public class PatentInfoServiceImpl implements IPatentInfoService{
 
 	@Resource
 	private PatentInfoDao patentInfoDao;
+	@Resource
+	private RedisService redisService;
 	
 	@Override
 	public int addPatentInfo(PatentInfo patent) {
@@ -60,16 +63,24 @@ public class PatentInfoServiceImpl implements IPatentInfoService{
 		List<PatentInfo> patentList=new ArrayList<>(appNumbers.length);
 		
 		for(String appNumber:appNumbers) {
-			if(!isExists(appNumber)) {//可能会存在同步问题
-				PatentInfo patent=new PatentInfo();
-				patent.setAppNumber(appNumber);
-				
-				//result+=addPatentInfo(patent);
-				patentList.add(patent);
+			
+			synchronized (this) {
+				if(redisService.isExists(appNumber)) {
+					continue;
+				}else {
+					redisService.add(appNumber, "0");
+				}
 			}
+			
+			PatentInfo patent=new PatentInfo();
+			patent.setAppNumber(appNumber);
+			
+			//result+=addPatentInfo(patent);
+			patentList.add(patent);
 		}
 		
 		if(patentList.size()>0) {
+			
 			batchAdd(patentList);
 			result=patentList.size();
 			patentList.clear();
@@ -77,7 +88,7 @@ public class PatentInfoServiceImpl implements IPatentInfoService{
 		
 		return result;
 	}
-
+	
 	@Override
 	public int delByAppNumber(String appNumber) {
 		return patentInfoDao.delByAppNumber(appNumber);

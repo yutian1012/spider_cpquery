@@ -19,4 +19,6 @@ public interface IPatentInfoService {
 	public boolean isExists(String appNumber);
 	
 	public int syncPatent(String[] appNumbers);
+	
+	public List<String> getPatentListLimit(int start,int size);
 }

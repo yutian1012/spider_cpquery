@@ -71,4 +71,12 @@ public class PatentInfoServiceImpl implements IPatentInfoService{
 		return result;
 	}
 
+	@Override
+	public List<String> getPatentListLimit(int start, int size) {
+		Map<String, Integer> params=new HashMap<>();
+		params.put("start", start);
+		params.put("size", size);
+		return patentInfoDao.getPatentListLimit(params);
+	}
+
 }

@@ -13,10 +13,10 @@ public class PatentSyncApi {
 	 * @return
 	 * @throws Exception
 	 */
-	public Response syncPatent(String[] appNumbers) throws Exception {
+	public Response syncPatent(String url,String[] appNumbers) throws Exception {
 		
 		//String url="http://localhost:8001/patent/syncPatent";
-		String url="http://114.251.8.233:8001/patent/syncPatent";
+		//String url="http://114.251.8.233:8001/patent/syncPatent";
 		
 		return getResponse(url, appNumbers);
 	}
@@ -27,9 +27,10 @@ public class PatentSyncApi {
 	 * @return
 	 * @throws Exception
 	 */
-	public Response syncPaidFee(String[] appNumbers) throws Exception {
+	public Response syncPaidFee(String url,String[] appNumbers) throws Exception {
 		
-		String url="http://localhost:8001/patent/paidFee";
+		//String url="http://localhost:8001/patent/paidFee";
+		//String url="http://114.251.8.233:8001/patent/paidFee";
 		
 		return getResponse(url, appNumbers);
 		

@@ -42,5 +42,14 @@ public class IPatentInfoServiceTest {
 		assertTrue(1==list.size());
 		
 	}
+	
+	@Test
+	public void testGetPatentListLimit() {
+		int from=0;
+		int size=100;
+		List<String> list=patentInfoService.getPatentListLimit(from, size);
+		assertNotNull(list);
+		assertTrue(list.size()==100);
+	}
 
 }

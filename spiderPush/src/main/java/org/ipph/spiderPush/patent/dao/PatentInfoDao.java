@@ -20,4 +20,6 @@ public interface PatentInfoDao {
 	public int batchAdd(List<PatentInfo> patentList);
 	
 	public boolean isExists(String appNumber);
+	
+	public List<String> getPatentListLimit(Map<String,Integer> params);
 }
