@@ -31,3 +31,6 @@ spider:
   patent:
     sync:
       url: http://localhost:8001/patent/syncPatent
+  patentfee:
+    sync:
+      url: http://localhost:8001/patent/paidFee

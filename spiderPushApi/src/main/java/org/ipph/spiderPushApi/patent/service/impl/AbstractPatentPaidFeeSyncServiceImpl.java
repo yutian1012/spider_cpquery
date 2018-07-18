@@ -2,6 +2,7 @@ package org.ipph.spiderPushApi.patent.service.impl;
 
 import java.util.List;
 
+import org.apache.http.conn.HttpHostConnectException;
 import org.ipph.spiderPushApi.common.Response;
 import org.ipph.spiderPushApi.patent.PatentSyncApi;
 import org.ipph.spiderPushApi.patent.service.IPatentPaidFeeSyncService;
@@ -20,7 +21,7 @@ public abstract class AbstractPatentPaidFeeSyncServiceImpl implements IPatentPai
 		 Long total=getTotals();
 		 
 		 Long from=0L;
-		 Long size=1000L;
+		 Long size=50L;
 		 
 		 while(from<total) {
 			 List<String> list=getPatentInfoListLimit(from.intValue(), size.intValue());
@@ -32,6 +33,9 @@ public abstract class AbstractPatentPaidFeeSyncServiceImpl implements IPatentPai
 					
 					processResponse(response);
 				} catch (Exception e) {
+					if(e instanceof HttpHostConnectException) {
+						throw new Exception("服务连接异常，请检查爬虫系统是否启动，或网络配置是否正确!!!");
+					}
 				}
 				
 				list.clear();
