@@ -27,12 +27,14 @@ public class SipopPatentFeeScheduledTask {
 	private JmsSender jmsSender;
 	
 	//每周五执行
-	@Scheduled(cron = "0 0 1 ? * FRI ")
+	// @Scheduled(cron = "0 0 1 ? * FRI")
+	 @Scheduled(cron = "0 0 1 * * ?")//每天1点触发
+	//@Scheduled(cron = "0 56 21 * * ?")
 	 public void executeSpiderSipop(){
 		//获取待同步到专利数量
 		 long total=patentInfoService.getTotals();
 		 
-		 Long from=93391L;
+		 Long from=0L;
 		 Long size=1000L;
 		 
 		 while(from<=total) {

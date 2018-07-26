@@ -39,7 +39,7 @@ public class MailScheduledTasks{
      * 每周五，反馈当前爬虫运行结果
      * 23点发送上7天报告
      */
-    @Scheduled(cron = "0 0 23 ? * FRI ")
+    @Scheduled(cron = "0 0 23 ? * FRI")
     public void reportSpiderResult(){
     	
     	logger.info("preparing report spider result!");
